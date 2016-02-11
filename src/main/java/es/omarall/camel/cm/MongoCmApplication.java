@@ -80,20 +80,6 @@ public class MongoCmApplication implements EnvironmentAware {
 			cmUri.append("&defaultFrom=").append(sender);
 		}
 
-		// Is there a ResponseProcessor implementation available in the
-		// registry?
-		final String responseProcessor = env.getProperty("responseProcessor");
-		if (responseProcessor != null && !responseProcessor.isEmpty()) {
-			cmUri.append("&responseProcessor=").append(responseProcessor);
-		}
-
-		// Defaults to false
-		final Boolean testConnectionOnStartup = Boolean
-				.parseBoolean(env.getProperty("testConnectionOnStartup", "false"));
-		if (testConnectionOnStartup != false) {
-			cmUri.append("&testConnectionOnStartup=").append(testConnectionOnStartup.toString());
-		}
-
 		// Defaults to 8
 		final Integer defaultMaxNumberOfParts = Integer.parseInt(env.getProperty("defaultMaxNumberOfParts", "8"));
 		cmUri.append("&defaultMaxNumberOfParts=").append(defaultMaxNumberOfParts.toString());
