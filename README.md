@@ -1,8 +1,8 @@
 # CAMEL CM Component Sample of Usage
 
-This project is a [Spring Boot Project](http://projects.spring.io/spring-boot/) to show how [camel-cm component](https://github.com/oalles/camel-cm) can be integrated in a camel route.
+This project is a [Spring Boot Project](http://projects.spring.io/spring-boot/) to show how [camel-cm](https://github.com/oalles/camel-cm) component can be integrated in a camel route.
 
-### Short Description
+### Description
 The application consumes documents from a mongodb capped collection. For each document it tries to create a SMSMessage instance, which is the payload accepted by camel-cm component. 
 
 In order to send messages you just have to insert documents in the capped collection following the rules set in the [Translator](https://github.com/oalles/camel-cm-sample/blob/master/src/main/java/es/omarall/camel/cm/MongoTranslator.java). 
@@ -39,9 +39,9 @@ You need a valid account. [Register for one](https://www.cmtelecom.com/support).
 	git clone https://github.com/oalles/camel-mongotc
 	cd camel-mongotc
 	mvn install
-	```
+	```	
 	
-3. Clone [camel-cm-sample](https://github.com/oalles/camel-cm-sample) component
+3. Clone this project
 	
 	```
 	git clone https://github.com/oalles/camel-cm-sample
