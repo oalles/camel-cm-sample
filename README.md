@@ -75,7 +75,7 @@ You need a valid account. [Register for one](https://www.cmtelecom.com/support).
 ### Final comments.
 As you can see our app trigger is a document being inserted in a capped collection. 
 You could choose your own trigger and forget about all the mongo stuff in the project. 
-Just provide your custom Translator implementation before Camel CM component.
+Just provide your custom [Translator](https://github.com/oalles/camel-cm/blob/master/src/main/java/org/apache/camel/component/cm/client/Translator.java) implementation before Camel CM component.
  
 
 
