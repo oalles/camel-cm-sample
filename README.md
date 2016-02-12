@@ -1,7 +1,8 @@
-# camel-cm-sample
+# CAMEL CM Component Sample of Usage
 
-This is a [Spring Boot Project](http://projects.spring.io/spring-boot/) to show an integration example for [camel-cm component](https://github.com/oalles/camel-cm).
+This project is a [Spring Boot Project](http://projects.spring.io/spring-boot/) to show how [camel-cm component](https://github.com/oalles/camel-cm) can be integrated in a camel route.
 
+### Short Description
 The application consumes documents from a capped collection and tries to create a SMSMessage instance in order to send it to CM SMS GW.
 
 Have a look at the route definition.
