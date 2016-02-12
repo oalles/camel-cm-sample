@@ -49,7 +49,7 @@ public class MongoCmApplication implements EnvironmentAware {
 					}
 				});
 
-				// 1. Consume a document from a Tailable MONGODB collection.
+				// 1. Consume a document from a capped MONGODB collection.
 				from(mongoUri)
 
 						// 2. Translate the document to a SMSMessage instance

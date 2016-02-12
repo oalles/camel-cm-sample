@@ -10,7 +10,7 @@ In order to send messages you just have to insert documents in the capped collec
 Have a look at the route definition.
 
 ```java
-	// 1. Consume a document from a Tailable MONGODB collection.
+	// 1. Consume a document from a capped MONGODB collection.
 	from(mongoUri)
 
 			// 2. Translate the document to a SMSMessage instance
