@@ -69,7 +69,7 @@ public class MongoCmApplication implements EnvironmentAware {
 
 	@Bean
 	public Translator translator() {
-		return new Translator();
+		return new MongoTranslator();
 	}
 
 	/**
