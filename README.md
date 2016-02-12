@@ -65,7 +65,7 @@ You need a valid account. [Register for one](https://www.cmtelecom.com/support).
 	mvn spring-boot:run
 	```
 	
-7. Go to the mongo shell and insert messages in the capped collection following a simple rule. Every document that has a 'phoneNumber' field and a 'message' is going to be sent to CM SMS GW. See [Translator](https://github.com/oalles/camel-cm-sample/blob/master/src/main/java/es/omarall/camel/cm/Translator.java) rules to convert from Document to SMSMessage. The payload that camel-cm component expects. 
+7. Go to the mongo shell and insert messages in the capped collection following a simple rule. Every document that has a 'phoneNumber' field and a 'message' is going to be sent to CM SMS GW. See [Translator](https://github.com/oalles/camel-cm-sample/blob/master/src/main/java/es/omarall/camel/cm/MongoTranslator.java) rules to convert from Document to SMSMessage. The payload that camel-cm component expects. 
 	
 	```
 	db.insert({a: 1,b: 2}) #Not CM Sendable
