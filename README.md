@@ -44,7 +44,7 @@ You need a valid account. [Register for one](https://www.cmtelecom.com/support).
 	git clone https://github.com/oalles/camel-cm-sample
 	```
 	
-4. Open [application.properties](https://github.com/oalles/camel-cm-sample/blob/master/src/main/resources/application.properties) and the product-token you have been provided by mail. 
+4. Open [application.properties](https://github.com/oalles/camel-cm-sample/blob/master/src/main/resources/application.properties) and set the product-token you have been provided by mail. 
 5. Start the mongo shell and connect to your MongoDB instance, in this case running on localhost with default port, and create a capped collection in a given database. 
 	
 	```
