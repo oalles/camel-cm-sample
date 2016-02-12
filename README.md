@@ -53,7 +53,7 @@ You need a valid account. [Register for one](https://www.cmtelecom.com/support).
 	db.createCollection("messages", {capped: true, size: 1000})
 	```
 	 
-Set db and collection names in the [application.properties](https://github.com/oalles/camel-cm-sample/blob/master/src/main/resources/application.properties) file. 
+	Set db and collection names in the [application.properties](https://github.com/oalles/camel-cm-sample/blob/master/src/main/resources/application.properties) file. 
 
 6. Run the application.
 	
