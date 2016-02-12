@@ -2,10 +2,10 @@ package es.omarall.camel.cm;
 
 import java.net.UnknownHostException;
 
-import org.apache.camel.Message;
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.cm.client.SMSMessage;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +22,7 @@ public class MongoCmApplication implements EnvironmentAware {
 
 	private final Logger LOG = LoggerFactory.getLogger(MongoCmApplication.class);
 
+	// Both componentes are URI based COMPONENTS.
 	private String mongoUri;
 	private String cmUri;
 
@@ -36,26 +37,27 @@ public class MongoCmApplication implements EnvironmentAware {
 			@Override
 			public void configure() throws Exception {
 
+				// specify the error handling per exception type
+				onException(RuntimeException.class).handled(true).logExhausted(true).logStackTrace(false)
+						.logExhaustedMessageHistory(true).process(new Processor() {
+
+					@Override
+					public void process(Exchange exchange) throws Exception {
+
+						LOG.error("Document: {} is not CM Sendable. ",
+								exchange.getIn().getBody(Document.class).toString());
+					}
+				});
+
+				// 1. Consume a document from a Tailable MONGODB collection.
 				from(mongoUri)
 
-						// http://camel.apache.org/message-translator.html
-						// Document -> SMSMessage
-						.process(exchange -> {
+						// 2. Translate the document to a SMSMessage instance
+						// following an easy rule.
+						.bean(Translator.class, "translate")
 
-					Message in = exchange.getIn();
-					Document document = in.getBody(Document.class);
-
-					if (!document.containsKey("phoneNumber") || !document.containsKey("message")) {
-						LOG.debug("SMS Message cannot be built");
-						return;
-					}
-
-					in.setBody(new SMSMessage(document.getString("message"), document.getString("phoneNumber")));
-				})
-
-						.to(cmUri)
-
-						.routeId("SAMPLE-ROUTE-TO-CM");
+						// 3. Send SMSMessage to CMComponent
+						.to(cmUri).routeId("FROM-MONGO-TO-CM-WITH-LOVE");
 			}
 		};
 	}
@@ -63,6 +65,11 @@ public class MongoCmApplication implements EnvironmentAware {
 	@Bean
 	public MongoClient mongoClient() throws UnknownHostException {
 		return new MongoClient();
+	}
+
+	@Bean
+	public Translator translator() {
+		return new Translator();
 	}
 
 	/**
