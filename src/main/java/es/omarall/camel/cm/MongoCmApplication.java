@@ -54,7 +54,7 @@ public class MongoCmApplication implements EnvironmentAware {
 
 						// 2. Translate the document to a SMSMessage instance
 						// following an easy rule.
-						.bean(Translator.class, "translate")
+						.bean(MongoTranslator.class, "translate")
 
 						// 3. Send SMSMessage to CMComponent
 						.to(cmUri).routeId("FROM-MONGO-TO-CM-WITH-LOVE");
