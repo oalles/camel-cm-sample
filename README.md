@@ -3,7 +3,7 @@
 This project is a [Spring Boot Project](http://projects.spring.io/spring-boot/) to show how [camel-cm component](https://github.com/oalles/camel-cm) can be integrated in a camel route.
 
 ### Short Description
-The application consumes documents from a capped collection and tries to create a SMSMessage instance in order to send it to CM SMS GW.
+The application consumes documents from a mongodb capped collection. For each document it tries to create a SMSMessage instance, which is the payload accepted by camel-cm component. 
 
 Have a look at the route definition.
 
@@ -13,7 +13,7 @@ Have a look at the route definition.
 
 			// 2. Translate the document to a SMSMessage instance
 			// following an easy rule.
-			.bean(Translator.class, "translate")
+			.bean(MongoTranslator.class, "translate")
 
 			// 3. Send SMSMessage to CMComponent
 			.to(cmUri).routeId("FROM-MONGO-TO-CM-WITH-LOVE");
