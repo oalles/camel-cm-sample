@@ -5,6 +5,8 @@ This project is a [Spring Boot Project](http://projects.spring.io/spring-boot/) 
 ### Short Description
 The application consumes documents from a mongodb capped collection. For each document it tries to create a SMSMessage instance, which is the payload accepted by camel-cm component. 
 
+In order to send messages you just have to insert documents in the capped collection following the rules set in the [Translator](https://github.com/oalles/camel-cm-sample/blob/master/src/main/java/es/omarall/camel/cm/MongoTranslator.java). 
+
 Have a look at the route definition.
 
 ```java
