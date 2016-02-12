@@ -1,6 +1,7 @@
 package es.omarall.camel.cm;
 
 import org.apache.camel.component.cm.client.SMSMessage;
+import org.apache.camel.component.cm.client.Translator;
 import org.bson.Document;
 
 public class MongoTranslator implements Translator<Document>{
