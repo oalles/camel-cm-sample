@@ -5,7 +5,7 @@
 
 	<groupId>es.omarall</groupId>
 	<artifactId>camel-cm-sample</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<description>Spring Boot Project showing a camel route consuming sms messages from a tailable mongodb collection to be sent via CM Direct SMSGW </description>
@@ -83,7 +83,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
