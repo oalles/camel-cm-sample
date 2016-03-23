@@ -42,7 +42,7 @@ You need a valid account. [Register for one](https://www.cmtelecom.com/support).
 			<version>${camel.version}</version>
 		</dependency>
 	```
-	*to consume messages from a capped collection, the camel-mongodb component is needed
+	* to consume messages from a capped collection, the camel-mongodb component is needed
 	
 	```
 		<dependency>
