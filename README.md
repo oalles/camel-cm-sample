@@ -1,4 +1,4 @@
-# CAMEL CM SMS Component Sample of Usage
+## CAMEL CM SMS Component Sample of Usage
 
 This project is a [Spring Boot Project](http://projects.spring.io/spring-boot/) to show how camel-cm-sms component can be integrated in a camel route.
 
