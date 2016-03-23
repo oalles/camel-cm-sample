@@ -1,9 +1,9 @@
-# CAMEL CM Component Sample of Usage
+# CAMEL CM SMS Component Sample of Usage
 
-This project is a [Spring Boot Project](http://projects.spring.io/spring-boot/) to show how [camel-cm](https://github.com/oalles/camel-cm) component can be integrated in a camel route.
+This project is a [Spring Boot Project](http://projects.spring.io/spring-boot/) to show how camel-cm-sms component can be integrated in a camel route.
 
 ### Description
-The application consumes documents from a mongodb capped collection. For each document it tries to create a SMSMessage instance, which is the payload accepted by camel-cm component. 
+The application consumes documents from a mongodb capped collection. For each document it tries to create a SMSMessage instance, which is the payload accepted by camel-cm-sms component. 
 
 In order to send messages you just have to insert documents in the capped collection following the rules set in the [Translator](https://github.com/oalles/camel-cm-sample/blob/master/src/main/java/es/omarall/camel/cm/MongoTranslator.java). 
 
@@ -18,33 +18,39 @@ Have a look at the route definition.
 			.bean(MongoTranslator.class, "translate")
 
 			// 3. Send SMSMessage to CMComponent
-			.to(cmUri).routeId("FROM-MONGO-TO-CM-WITH-LOVE");
+			.to(cmUri)
+			
+			.routeId("FROM-MONGO-TO-CM-WITH-LOVE");
 ```
 
 ### Usage:
 
 You need a valid account. [Register for one](https://www.cmtelecom.com/support). They provide some free credits.
 
-1. **clone and install** [camel-cm](https://github.com/oalles/camel-cm) component
-
-	```
-	git clone https://github.com/oalles/camel-cm
-	cd camel-cm
-	mvn install
-	```
-	
-2. In order to consume messages from a mongodb capped collection, **clone and install** [camel-mongotc](https://github.com/oalles/camel-mongotc) component
-	
-	```
-	git clone https://github.com/oalles/camel-mongotc
-	cd camel-mongotc
-	mvn install
-	```	
-	
-3. Clone this project
+1. Clone this project
 	
 	```
 	git clone https://github.com/oalles/camel-cm-sample
+	```
+	
+2. Open pom.xml
+	* the camel-cm-sms component is needed to send sms messages via CM.  
+	```
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-cm-sms</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+	```
+	
+	*In order to consume messages from a mongodb capped collection, the camel-mongodb component is added
+	
+	```
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-mongodb</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
 	```
 	
 4. Open [application.properties](https://github.com/oalles/camel-cm-sample/blob/master/src/main/resources/application.properties) and set the product-token you have been provided by mail. 
@@ -75,7 +81,7 @@ You need a valid account. [Register for one](https://www.cmtelecom.com/support).
 ### Final comments.
 As you can see our app trigger is a document being inserted in a capped collection. 
 You could choose your own trigger and forget about all the mongo stuff in the project. 
-Just provide your custom [Translator](https://github.com/oalles/camel-cm/blob/master/src/main/java/org/apache/camel/component/cm/client/Translator.java) implementation before Camel CM component.
+Just provide your custom [Translator](https://github.com/oalles/camel-cm/blob/master/src/main/java/org/apache/camel/component/cm/client/Translator.java) implementation before Camel CM SMS component.
  
 
 

@@ -7,7 +7,6 @@ import org.apache.camel.Processor;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.cm.client.Translator;
-import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +15,7 @@ import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
 @SpringBootApplication
@@ -49,7 +49,7 @@ public class MongoCmApplication implements EnvironmentAware {
                             throws Exception {
 
                             LOG.error("Document: {} is not CM Sendable. ",
-                                      exchange.getIn().getBody(Document.class)
+                                      exchange.getIn().getBody(DBObject.class)
                                           .toString());
                         }
                     });
@@ -88,7 +88,7 @@ public class MongoCmApplication implements EnvironmentAware {
             .getRequiredProperty("cm.product-token");
         final String sender = env.getRequiredProperty("cm.default-sender");
 
-        final StringBuffer cmUri = new StringBuffer("cm:" + host)
+        final StringBuffer cmUri = new StringBuffer("cm-sms:" + host)
             .append("?productToken=").append(productTokenString);
         if (sender != null && !sender.isEmpty()) {
             cmUri.append("&defaultFrom=").append(sender);
@@ -103,11 +103,11 @@ public class MongoCmApplication implements EnvironmentAware {
         this.cmUri = cmUri.toString();
 
         // 2. Build Mongo Uri
-        final String dbName = env.getRequiredProperty("mongotc.db");
+        final String dbName = env.getRequiredProperty("mongo.db");
         final String collectionName = env
-            .getRequiredProperty("mongotc.collection");
+            .getRequiredProperty("mongo.collection");
         mongoUri = String.format(
-                                 "mongotc:mongoClient?database=%s&collection=%s",
+                                 "mongodb:mongoClient?database=%s&collection=%s",
                                  dbName, collectionName);
     }
 }

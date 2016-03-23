@@ -2,19 +2,20 @@ package es.omarall.camel.cm;
 
 import org.apache.camel.component.cm.client.SMSMessage;
 import org.apache.camel.component.cm.client.Translator;
-import org.bson.Document;
 
-public class MongoTranslator implements Translator<Document>{
+import com.mongodb.DBObject;
 
-	public SMSMessage translate(Document document) {
+public class MongoTranslator implements Translator<DBObject> {
 
-		// Is it CM Sendable?
-		if (!document.containsKey("phoneNumber") || !document.containsKey("message"))
-			throw new RuntimeException(
-					"This document is not CM sendable. Meaning, i cannot create a SMSMessage instance from it cause it must contain both 'phoneNumber' field and a 'message' field");
-
-		// OK. it is CM Sendable.
-		return new SMSMessage(document.getString("message"), document.getString("phoneNumber"));
-	}
+    public SMSMessage translate(DBObject document) {
+        // Is it CM Sendable?
+        if (!document.containsField("phoneNumber")
+            || !document.containsField("message")) {
+            throw new RuntimeException("This document is not CM sendable. Meaning, i cannot create a SMSMessage instance from it cause it must contain both 'phoneNumber' field and a 'message' field");
+        }
+        // OK. it is CM Sendable.
+        return new SMSMessage((String) document.get("message"),
+                              (String) document.get("phoneNumber"));
+    }
 
 }
