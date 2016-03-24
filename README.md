@@ -1,6 +1,6 @@
 ## CAMEL CM SMS Component Sample of Usage
 
-This project is a [Spring Boot Project](http://projects.spring.io/spring-boot/) to show how camel-cm-sms component can be integrated in a camel route.
+This project is a [Spring Boot Project](http://projects.spring.io/spring-boot/) to show how [camel-cm-sms](https://github.com/apache/camel/tree/master/components/camel-cm-sms/) component can be integrated in a camel route.
 
 ### Description
 The application consumes documents from a mongodb capped collection. For each document it tries to create a SMSMessage instance, which is the payload accepted by camel-cm-sms component. 
